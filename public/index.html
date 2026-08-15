@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopNest - Premium Modern Full-Stack E-Commerce Store</title>
+  <meta name="description" content="ShopNest is your one-stop shop for premium electronics, fashion, books, and accessories. Fast delivery and best prices.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <img src="/images/logo.svg" alt="ShopNest Logo">
+      </a>
+
+      <div class="nav-search">
+        <span class="nav-search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search products, brands, categories...">
+      </div>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions" style="display: flex; gap: 12px; align-items: center;"></div>
+        
+        <a href="/cart.html" class="cart-icon-btn" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Hero Banner Section -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-content">
+          <span class="hero-badge">✨ Summer Collection — New Arrivals</span>
+          <h1>Elevate Your Shopping Experience</h1>
+          <p>Discover premium products, great prices, and a seamless shopping experience—all in one place.</p>
+          <a href="#catalog" class="hero-cta">Shop Collection →</a>
+        </div>
+        <div class="hero-image">
+          <img src="/images/hero-shopping.svg" alt="ShopNest Featured Products Showcase">
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Categories Section -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Explore Categories</h2>
+          <p class="section-subtitle">Browse through our curated product collections</p>
+        </div>
+      </div>
+
+      <div class="categories-grid">
+        <a href="/index.html?category=Electronics#catalog" class="category-card">
+          <img src="/images/categories/electronics.svg" alt="Electronics">
+        </a>
+        <a href="/index.html?category=Fashion#catalog" class="category-card">
+          <img src="/images/categories/fashion.svg" alt="Fashion">
+        </a>
+        <a href="/index.html?category=Books#catalog" class="category-card">
+          <img src="/images/categories/books.svg" alt="Books">
+        </a>
+        <a href="/index.html?category=Accessories#catalog" class="category-card">
+          <img src="/images/categories/accessories.svg" alt="Accessories">
+        </a>
+      </div>
+    </section>
+
+    <!-- Catalog & Product Grid Section -->
+    <section class="section" id="catalog">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Our Products</h2>
+          <p class="section-subtitle">Top rated items crafted for performance and style</p>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="category-pills">
+          <button class="pill-btn active" data-category="All">All Items</button>
+          <button class="pill-btn" data-category="Electronics">⚡ Electronics</button>
+          <button class="pill-btn" data-category="Fashion">👔 Fashion</button>
+          <button class="pill-btn" data-category="Books">📚 Books</button>
+          <button class="pill-btn" data-category="Accessories">⌚ Accessories</button>
+        </div>
+
+        <div class="sort-select">
+          <label for="sort-select" style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-right: 8px;">Sort by:</label>
+          <select id="sort-select">
+            <option value="newest">Newest Arrivals</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-grid">
+        <div class="spinner"></div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section">
+      <div class="why-us">
+        <div style="text-align: center; margin-bottom: 36px;">
+          <h2 class="section-title">Why Shop With ShopNest?</h2>
+          <p class="section-subtitle">We guarantee the highest standards for every order</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">🚀</div>
+            <h3>Express Shipping</h3>
+            <p>Fast and reliable doorstep delivery with live tracking.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <h3>Secure Checkout</h3>
+            <p>100% safe payment processing & Cash on Delivery support.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💎</div>
+            <h3>Premium Quality</h3>
+            <p>Strictly inspected authentic products with warranty.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🎧</div>
+            <h3>24/7 Support</h3>
+            <p>Friendly customer support whenever you need assistance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">What Our Customers Say</h2>
+          <p class="section-subtitle">Real feedback from verified shoppers</p>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"ShopNest delivers an excellent shopping experience. My headphones arrived quickly and the sound quality is amazing!"</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">AR</div>
+            <div class="reviewer-info">
+              <h4>Ananya Reddy</h4>
+              <p>Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The checkout process was really smooth and the leather backpack is excellent. Great quality and highly recommended!"</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">RS</div>
+            <div class="reviewer-info">
+              <h4>Rahul Sharma</h4>
+              <p>Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Great product range and excellent customer service. The website is easy to use and the shopping experience feels really smooth."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">PN</div>
+            <div class="reviewer-info">
+              <h4>Priya Nair</h4>
+              <p>Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-card">
+      <h2>Subscribe to ShopNest Updates</h2>
+      <p>Get exclusive discounts, early access to new releases, and weekly deals directly in your inbox.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing to ShopNest!', 'success');">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn btn-primary" style="padding: 14px 28px; font-weight: 700;">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="/images/logo.svg" alt="ShopNest" style="height: 40px; margin-bottom: 16px; filter: brightness(0) invert(1);">
+          <p style="font-size: 14px; line-height: 1.7; max-width: 320px;">ShopNest is a modern full-stack e-commerce project designed for high performance, ease of use, and visual excellence.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="#catalog">Products Catalog</a></li>
+            <li><a href="/cart.html">Shopping Cart</a></li>
+            <li><a href="/orders.html">My Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/index.html?category=Electronics#catalog">Electronics</a></li>
+            <li><a href="/index.html?category=Fashion#catalog">Fashion</a></li>
+            <li><a href="/index.html?category=Books#catalog">Books</a></li>
+            <li><a href="/index.html?category=Accessories#catalog">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact & Support</h4>
+          <ul>
+            <li>Email: support@shopnest.com</li>
+            <li>Phone: +1 (800) 555-SHOP</li>
+            <li>Location: Tech University Campus</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 ShopNest E-Commerce Project. All Rights Reserved. Created for Full-Stack Development Assignment.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/catalog.js"></script>
+</body>
+</html>

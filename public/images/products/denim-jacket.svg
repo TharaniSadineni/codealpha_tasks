@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="pBg_Classic_Vintage_Denim_Jacket" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EFF6FF" />
+      <stop offset="100%" stop-color="#BFDBFE" />
+    </linearGradient>
+    <filter id="pShadow_Classic_Vintage_Denim_Jacket" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="500" height="500" rx="24" fill="url(#pBg_Classic_Vintage_Denim_Jacket)" />
+  <circle cx="250" cy="220" r="140" fill="#FFFFFF" opacity="0.3" filter="url(#pShadow_Classic_Vintage_Denim_Jacket)" />
+  <circle cx="250" cy="220" r="100" fill="#FFFFFF" opacity="0.5" />
+  
+  <text x="250" y="240" font-size="110" text-anchor="middle" dominant-baseline="central">🧥</text>
+  
+  <rect x="40" y="390" width="420" height="70" rx="16" fill="#FFFFFF" opacity="0.95" filter="url(#pShadow_Classic_Vintage_Denim_Jacket)" />
+  <text x="250" y="423" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="18" fill="#1E293B" text-anchor="middle">Classic Vintage Denim Jacket</text>
+  <text x="250" y="445" font-family="'Inter', system-ui, sans-serif" font-weight="600" font-size="13" fill="#2563EB" text-anchor="middle">Official ShopNest Product</text>
+</svg>

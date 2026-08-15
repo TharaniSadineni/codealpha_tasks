@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - ShopNest</title>
+  <meta name="description" content="Order confirmation and delivery tracking summary on ShopNest.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <img src="/images/logo.svg" alt="ShopNest Logo">
+      </a>
+      <div class="nav-actions">
+        <div id="nav-user-actions" style="display: flex; gap: 12px; align-items: center;"></div>
+        <a href="/cart.html" class="cart-icon-btn" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="min-height: 80vh; margin-top: 40px; margin-bottom: 60px;">
+    <!-- Confirmation Banner -->
+    <div id="confirmation-view-container">
+      <div class="spinner"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 ShopNest E-Commerce. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/order-confirmation.js"></script>
+</body>
+</html>

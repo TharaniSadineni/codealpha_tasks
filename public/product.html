@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - ShopNest</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <img src="/images/logo.svg" alt="ShopNest Logo">
+      </a>
+
+      <div class="nav-search">
+        <span class="nav-search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search products...">
+      </div>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions" style="display: flex; gap: 12px; align-items: center;"></div>
+        <a href="/cart.html" class="cart-icon-btn" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div style="margin-top: 24px;">
+      <a href="/index.html" style="font-weight: 600; color: var(--primary); font-size: 14px;">← Back to All Products</a>
+    </div>
+
+    <!-- Product Detail Container -->
+    <div id="product-detail-wrap">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Related Products -->
+    <section class="section" id="related-products-wrap" style="display: none;">
+      <h3 class="section-title" style="font-size: 24px; margin-bottom: 24px;">Related Products You Might Like</h3>
+      <div class="products-grid" id="related-grid" style="grid-template-columns: repeat(4, 1fr);"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 ShopNest E-Commerce. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/product-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
+  <g transform="translate(2, 6)">
+    <polygon points="10,0 22,15 15,15 15,28 7,28 7,15 0,15" fill="#FF671F"/>
+    <polygon points="18,7 30,22 23,22 23,28 17,28 19,22 11,22" fill="#046A38"/>
+  </g>
+  <text x="36" y="26" font-family="'Inter', system-ui, sans-serif" font-size="18" font-weight="900" fill="#002D62">BHIM<tspan font-size="11" fill="#FF671F" font-weight="700"> UPI</tspan></text>
+</svg>

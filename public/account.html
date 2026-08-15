@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account - ShopNest</title>
+  <meta name="description" content="Manage your ShopNest profile, view orders, addresses, payment methods, and settings.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="nav-brand">
+        <img src="/images/logo.svg" alt="ShopNest Logo">
+      </a>
+
+      <div class="nav-search">
+        <span class="nav-search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search products...">
+      </div>
+
+      <div class="nav-actions">
+        <div id="nav-user-actions" style="display: flex; gap: 12px; align-items: center;"></div>
+        <a href="/cart.html" class="cart-icon-btn" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="min-height: 80vh; margin-top: 30px; margin-bottom: 60px;">
+    <div class="account-container">
+      <!-- Sidebar Navigation -->
+      <aside class="account-sidebar">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--border);">
+          <div id="sidebar-avatar" class="dropdown-header-avatar" style="width: 48px; height: 48px; font-size: 18px;">U</div>
+          <div>
+            <h4 id="sidebar-user-name" style="font-size: 15px; font-weight: 700;">User Name</h4>
+            <p id="sidebar-user-email" style="font-size: 12px; color: var(--text-muted);">user@example.com</p>
+          </div>
+        </div>
+
+        <nav>
+          <div class="account-nav-item active" data-tab="profile" onclick="switchAccountTab('profile')">👤 Profile Overview</div>
+          <div class="account-nav-item" data-tab="orders" onclick="switchAccountTab('orders')">📦 My Orders</div>
+          <div class="account-nav-item" data-tab="wishlist" onclick="switchAccountTab('wishlist')">💖 Wishlist</div>
+          <div class="account-nav-item" data-tab="addresses" onclick="switchAccountTab('addresses')">🏠 Saved Addresses</div>
+          <div class="account-nav-item" data-tab="payments" onclick="switchAccountTab('payments')">💳 Payment Methods</div>
+          <div class="account-nav-item" data-tab="settings" onclick="switchAccountTab('settings')">⚙️ Account Settings</div>
+          <div class="account-nav-item" data-tab="help" onclick="switchAccountTab('help')">❓ Help & Support</div>
+          <div style="border-top: 1px solid var(--border); margin: 8px 0;"></div>
+          <div class="account-nav-item" style="color: var(--danger);" onclick="ShopNestAPI.logout()">🚪 Logout</div>
+        </nav>
+      </aside>
+
+      <!-- Main Content Card -->
+      <section class="account-content-card">
+
+        <!-- 1. Profile Overview Tab -->
+        <div id="tab-content-profile" class="account-tab-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div>
+              <h2 style="font-size: 24px; font-weight: 800;">My Account Overview</h2>
+              <p style="color: var(--text-muted); font-size: 14px;">Central dashboard hub for your ShopNest account</p>
+            </div>
+            <button onclick="openEditProfileModal()" class="btn btn-outline" style="font-size: 13px;">✏️ Edit Profile</button>
+          </div>
+
+          <div style="display: flex; gap: 24px; align-items: center; margin-bottom: 30px; padding: 24px; background: #F8FAFC; border-radius: 16px; border: 1px solid var(--border);">
+            <div id="profile-big-avatar" style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 800;">U</div>
+            <div>
+              <h3 id="profile-name-text" style="font-size: 20px; font-weight: 800;">User Name</h3>
+              <p id="profile-email-text" style="color: var(--text-muted); font-size: 14px;">email@domain.com</p>
+              <span id="profile-role-tag" class="status-badge status-confirmed" style="margin-top: 6px;">Customer</span>
+            </div>
+          </div>
+
+          <!-- Quick Navigation Hub Cards -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+            <div onclick="switchAccountTab('orders')" style="padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: white; cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size: 28px; margin-bottom: 8px;">📦</div>
+              <h4 style="font-size: 16px; font-weight: 700;">My Orders</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Track orders & view receipts</p>
+            </div>
+            <div onclick="switchAccountTab('wishlist')" style="padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: white; cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size: 28px; margin-bottom: 8px;">💖</div>
+              <h4 style="font-size: 16px; font-weight: 700;">Wishlist</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">View saved favorite items</p>
+            </div>
+            <div onclick="switchAccountTab('addresses')" style="padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: white; cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size: 28px; margin-bottom: 8px;">🏠</div>
+              <h4 style="font-size: 16px; font-weight: 700;">Saved Addresses</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Manage shipping destinations</p>
+            </div>
+            <div onclick="switchAccountTab('payments')" style="padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: white; cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size: 28px; margin-bottom: 8px;">💳</div>
+              <h4 style="font-size: 16px; font-weight: 700;">Payment Methods</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Manage payment methods</p>
+            </div>
+            <div onclick="switchAccountTab('settings')" style="padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: white; cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size: 28px; margin-bottom: 8px;">⚙️</div>
+              <h4 style="font-size: 16px; font-weight: 700;">Account Settings</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Password & preferences</p>
+            </div>
+            <div onclick="switchAccountTab('help')" style="padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: white; cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size: 28px; margin-bottom: 8px;">❓</div>
+              <h4 style="font-size: 16px; font-weight: 700;">Help & Support</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">FAQs & support tickets</p>
+            </div>
+          </div>
+
+          <!-- Account Summary Grid -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: white;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Full Name</div>
+              <div id="profile-field-name" style="font-size: 15px; font-weight: 700; margin-top: 4px;">-</div>
+            </div>
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: white;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Email Address</div>
+              <div id="profile-field-email" style="font-size: 15px; font-weight: 700; margin-top: 4px;">-</div>
+            </div>
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: white;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Phone Number</div>
+              <div id="profile-field-phone" style="font-size: 15px; font-weight: 700; margin-top: 4px;">Not provided</div>
+            </div>
+            <div style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: white;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Account Status</div>
+              <div style="font-size: 15px; font-weight: 700; color: var(--success); margin-top: 4px;">Active Verified User</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Orders Tab / Dashboard -->
+        <div id="tab-content-orders" class="account-tab-pane" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-muted);">
+              <a href="javascript:void(0)" onclick="switchAccountTab('profile')" style="color: var(--primary); text-decoration: none; font-weight: 700;">My Account</a> / <span style="color: var(--text-main); font-weight: 700;">My Orders</span>
+            </div>
+            <button type="button" onclick="switchAccountTab('profile')" class="btn btn-outline" style="font-size: 12px; padding: 4px 10px;">← Back to My Account</button>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 20px;">My Order History</h2>
+          <div id="account-orders-list"><div class="spinner"></div></div>
+        </div>
+
+        <!-- 3. Wishlist Tab / Dashboard -->
+        <div id="tab-content-wishlist" class="account-tab-pane" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-muted);">
+              <a href="javascript:void(0)" onclick="switchAccountTab('profile')" style="color: var(--primary); text-decoration: none; font-weight: 700;">My Account</a> / <span style="color: var(--text-main); font-weight: 700;">Wishlist</span>
+            </div>
+            <button type="button" onclick="switchAccountTab('profile')" class="btn btn-outline" style="font-size: 12px; padding: 4px 10px;">← Back to My Account</button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h2 style="font-size: 24px; font-weight: 800;">My Saved Wishlist</h2>
+            <a href="/wishlist.html" class="btn btn-primary" style="font-size: 13px;">View Full Wishlist Page →</a>
+          </div>
+          <div id="account-wishlist-preview"><div class="spinner"></div></div>
+        </div>
+
+        <!-- 4. Saved Addresses Tab / Dashboard -->
+        <div id="tab-content-addresses" class="account-tab-pane" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-muted);">
+              <a href="javascript:void(0)" onclick="switchAccountTab('profile')" style="color: var(--primary); text-decoration: none; font-weight: 700;">My Account</a> / <span style="color: var(--text-main); font-weight: 700;">Saved Shipping Addresses</span>
+            </div>
+            <button type="button" onclick="switchAccountTab('profile')" class="btn btn-outline" style="font-size: 12px; padding: 4px 10px;">← Back to My Account</button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div>
+              <h2 style="font-size: 24px; font-weight: 800;">Saved Shipping Addresses</h2>
+              <p style="color: var(--text-muted); font-size: 14px;">Manage delivery destinations for fast checkout</p>
+            </div>
+            <button type="button" onclick="openAddressModal()" class="btn btn-primary" style="font-size: 13px;">+ Add New Address</button>
+          </div>
+          <div id="account-addresses-grid" class="address-grid"><div class="spinner"></div></div>
+        </div>
+
+        <!-- 5. Payment Methods Tab / Dashboard -->
+        <div id="tab-content-payments" class="account-tab-pane" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-muted);">
+              <a href="javascript:void(0)" onclick="switchAccountTab('profile')" style="color: var(--primary); text-decoration: none; font-weight: 700;">My Account</a> / <span style="color: var(--text-main); font-weight: 700;">Payment Methods</span>
+            </div>
+            <button type="button" onclick="switchAccountTab('profile')" class="btn btn-outline" style="font-size: 12px; padding: 4px 10px;">← Back to My Account</button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div>
+              <h2 style="font-size: 24px; font-weight: 800;">Saved Payment Methods</h2>
+              <p style="color: var(--text-muted); font-size: 14px;">Manage supported payment options (UPI, saved cards)</p>
+            </div>
+            <button type="button" onclick="openAddCardModal()" class="btn btn-primary" style="font-size: 13px;">+ Add Card</button>
+          </div>
+          <div id="account-payments-grid" class="payment-cards-grid"><div class="spinner"></div></div>
+        </div>
+
+        <!-- 6. Account Settings Tab / Dashboard -->
+        <div id="tab-content-settings" class="account-tab-pane" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-muted);">
+              <a href="javascript:void(0)" onclick="switchAccountTab('profile')" style="color: var(--primary); text-decoration: none; font-weight: 700;">My Account</a> / <span style="color: var(--text-main); font-weight: 700;">Account Settings</span>
+            </div>
+            <button type="button" onclick="switchAccountTab('profile')" class="btn btn-outline" style="font-size: 12px; padding: 4px 10px;">← Back to My Account</button>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 24px;">Account Settings</h2>
+          
+          <form id="settings-password-form" style="margin-bottom: 36px; padding-bottom: 30px; border-bottom: 1px solid var(--border);">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">Change Password</h3>
+            <div class="form-group">
+              <label for="curr-pass">Current Password</label>
+              <input type="password" id="curr-pass" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+              <label for="new-pass">New Password (min 6 chars)</label>
+              <input type="password" id="new-pass" class="form-control" placeholder="••••••••" minlength="6" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="font-size: 14px;">Update Password</button>
+          </form>
+
+          <div style="margin-bottom: 36px; padding-bottom: 30px; border-bottom: 1px solid var(--border);">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">Notification Preferences</h3>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                <input type="checkbox" id="pref-email" checked> Email Promotional Offers & Weekly Deals
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                <input type="checkbox" id="pref-order" checked> Order Tracking Updates & Delivery Alerts
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 18px; font-weight: 700; color: var(--danger); margin-bottom: 12px;">Danger Zone</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Logging out or deleting your account will terminate active sessions.</p>
+            <div style="display: flex; gap: 12px;">
+              <button type="button" onclick="ShopNestAPI.logout()" class="btn btn-outline" style="color: var(--danger); font-size: 13px;">🚪 Logout Account</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Help & Support Tab / Dashboard -->
+        <div id="tab-content-help" class="account-tab-pane" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-muted);">
+              <a href="javascript:void(0)" onclick="switchAccountTab('profile')" style="color: var(--primary); text-decoration: none; font-weight: 700;">My Account</a> / <span style="color: var(--text-main); font-weight: 700;">Help & Support</span>
+            </div>
+            <button type="button" onclick="switchAccountTab('profile')" class="btn btn-outline" style="font-size: 12px; padding: 4px 10px;">← Back to My Account</button>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 24px;">Help & Support</h2>
+
+          <div style="margin-bottom: 36px;">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">Frequently Asked Questions (FAQ)</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <details style="padding: 14px; background: #F8FAFC; border-radius: 10px; border: 1px solid var(--border);">
+                <summary style="font-weight: 700; cursor: pointer;">How do I track my order status?</summary>
+                <p style="margin-top: 10px; color: var(--text-muted); font-size: 14px;">Go to "My Orders" tab or page to view real-time delivery timelines for every order.</p>
+              </details>
+              <details style="padding: 14px; background: #F8FAFC; border-radius: 10px; border: 1px solid var(--border);">
+                <summary style="font-weight: 700; cursor: pointer;">What payment methods do you support?</summary>
+                <p style="margin-top: 10px; color: var(--text-muted); font-size: 14px;">We support Credit/Debit Cards, UPI (GPay/PhonePe/Paytm), Net Banking, and Cash on Delivery (COD).</p>
+              </details>
+              <details style="padding: 14px; background: #F8FAFC; border-radius: 10px; border: 1px solid var(--border);">
+                <summary style="font-weight: 700; cursor: pointer;">How does the Wishlist work?</summary>
+                <p style="margin-top: 10px; color: var(--text-muted); font-size: 14px;">Click the heart icon on any product card to save items to your personal wishlist across devices.</p>
+              </details>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">Contact Support Team</h3>
+            <form onsubmit="event.preventDefault(); showToast('Support ticket submitted successfully!', 'success');">
+              <div class="form-group">
+                <label for="support-subject">Subject</label>
+                <input type="text" id="support-subject" class="form-control" placeholder="Order inquiry or technical question" required>
+              </div>
+              <div class="form-group">
+                <label for="support-msg">Message</label>
+                <textarea id="support-msg" class="form-control" rows="4" placeholder="Describe your issue..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit Ticket</button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <!-- 1. Edit Profile Modal -->
+  <div class="modal-overlay" id="edit-profile-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 style="font-size: 20px; font-weight: 800;">Edit Profile Details</h2>
+        <button onclick="closeModal('edit-profile-modal')" class="modal-close">✕</button>
+      </div>
+      <form id="edit-profile-form">
+        <div class="form-group">
+          <label for="edit-name">Full Name *</label>
+          <input type="text" id="edit-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-phone">Phone Number</label>
+          <input type="tel" id="edit-phone" class="form-control" placeholder="+91 98765 43210">
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+          <button type="button" onclick="closeModal('edit-profile-modal')" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Address Modal (Add / Edit) -->
+  <div class="modal-overlay" id="address-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="address-modal-title" style="font-size: 20px; font-weight: 800;">Add Shipping Address</h2>
+        <button onclick="closeModal('address-modal')" class="modal-close">✕</button>
+      </div>
+      <form id="address-form">
+        <input type="hidden" id="addr-id">
+        <div class="form-group">
+          <label for="addr-label">Address Label</label>
+          <select id="addr-label" class="form-control">
+            <option value="Home">Home</option>
+            <option value="Work">Work / Office</option>
+            <option value="College">College / Campus</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label for="addr-name">Full Name *</label>
+            <input type="text" id="addr-name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="addr-phone">Phone Number *</label>
+            <input type="tel" id="addr-phone" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="addr-street">Street Address *</label>
+          <input type="text" id="addr-street" class="form-control" placeholder="House/Flat No, Street, Landmark" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label for="addr-city">City *</label>
+            <input type="text" id="addr-city" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="addr-state">State *</label>
+            <input type="text" id="addr-state" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="addr-pincode">PIN / ZIP Code *</label>
+            <input type="text" id="addr-pincode" class="form-control" required>
+          </div>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; margin-top: 10px; cursor: pointer;">
+          <input type="checkbox" id="addr-default"> Set as default delivery address
+        </label>
+        <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+          <button type="button" onclick="closeModal('address-modal')" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Address</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Add Card Modal -->
+  <div class="modal-overlay" id="add-card-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 style="font-size: 20px; font-weight: 800;">Add Saved Card (Sandbox Tokenized)</h2>
+        <button onclick="closeModal('add-card-modal')" class="modal-close">✕</button>
+      </div>
+      <form id="add-card-form">
+        <div class="form-group">
+          <label for="card-name">Cardholder Name *</label>
+          <input type="text" id="card-name" class="form-control" placeholder="JOHN DOE" required>
+        </div>
+        <div class="form-group">
+          <label for="card-number">Card Number *</label>
+          <input type="text" id="card-number" class="form-control" placeholder="4242 •••• •••• 4242" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label for="card-month">Expiry Month *</label>
+            <input type="text" id="card-month" class="form-control" placeholder="08" required>
+          </div>
+          <div class="form-group">
+            <label for="card-year">Expiry Year *</label>
+            <input type="text" id="card-year" class="form-control" placeholder="2029" required>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+          <button type="button" onclick="closeModal('add-card-modal')" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Card</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 ShopNest E-Commerce Project. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/account.js"></script>
+</body>
+</html>
