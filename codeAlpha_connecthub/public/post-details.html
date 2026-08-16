@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub - Post Details</title>
+  <meta name="description" content="View post details, full comments thread, like, and comment on ConnectHub.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <div class="logo-icon">C</div>
+        <span>ConnectHub</span>
+      </a>
+      <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <div id="navUserMenu" class="user-menu">
+        <!-- Rendered by auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Post Details Container -->
+  <main class="main-container post-details-container">
+    <div style="margin-bottom: 16px;">
+      <a href="/index.html" class="btn btn-secondary btn-sm">← Back to Feed</a>
+    </div>
+
+    <div id="postDetailsContainer">
+      <!-- Rendered by post-details.js -->
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/post-details.js"></script>
+</body>
+</html>

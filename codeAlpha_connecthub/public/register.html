@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub - Register</title>
+  <meta name="description" content="Create a ConnectHub account to share posts, follow users, and comment.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <div class="logo-icon">C</div>
+        <span>ConnectHub</span>
+      </a>
+      <div id="navUserMenu" class="user-menu">
+        <!-- Rendered by auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Register Card -->
+  <main class="auth-page" style="padding: 40px 20px;">
+    <div class="auth-card" style="max-width: 520px;">
+      <div class="auth-header">
+        <h1 class="auth-title">Join ConnectHub</h1>
+        <p class="auth-subtitle">Create your account to get started</p>
+      </div>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label" for="regName">Full Name</label>
+          <input type="text" id="regName" class="form-input" placeholder="e.g. John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regUsername">Username</label>
+          <input type="text" id="regUsername" class="form-input" placeholder="e.g. johndoe" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="e.g. john@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Password</label>
+          <input type="password" id="regPassword" class="form-input" placeholder="At least 6 characters" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regBio">Bio (Optional)</label>
+          <textarea id="regBio" class="form-textarea" rows="2" placeholder="Tell us a little bit about yourself..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Choose Avatar</label>
+          <div class="preset-avatars-grid">
+            <img src="/images/avatars/avatar1.png" class="avatar-option selected" data-src="/images/avatars/avatar1.png" alt="Avatar 1">
+            <img src="/images/avatars/avatar2.png" class="avatar-option" data-src="/images/avatars/avatar2.png" alt="Avatar 2">
+            <img src="/images/avatars/avatar3.png" class="avatar-option" data-src="/images/avatars/avatar3.png" alt="Avatar 3">
+            <img src="/images/avatars/avatar4.png" class="avatar-option" data-src="/images/avatars/avatar4.png" alt="Avatar 4">
+            <img src="/images/avatars/avatar5.png" class="avatar-option" data-src="/images/avatars/avatar5.png" alt="Avatar 5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regAvatarFile">Or Upload Custom Avatar</label>
+          <input type="file" id="regAvatarFile" class="form-input" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top:24px;">Create Account</button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="/login.html" class="auth-link">Log In</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let selectedAvatar = '/images/avatars/avatar1.png';
+
+      // Avatar selection
+      document.querySelectorAll('.avatar-option').forEach(img => {
+        img.addEventListener('click', () => {
+          document.querySelectorAll('.avatar-option').forEach(i => i.classList.remove('selected'));
+          img.classList.add('selected');
+          selectedAvatar = img.dataset.src;
+          document.getElementById('regAvatarFile').value = '';
+        });
+      });
+
+      const registerForm = document.getElementById('registerForm');
+      registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('regName').value.trim();
+        const username = document.getElementById('regUsername').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const bio = document.getElementById('regBio').value.trim();
+        const avatarFile = document.getElementById('regAvatarFile').files[0];
+
+        try {
+          const formData = new FormData();
+          formData.append('name', name);
+          formData.append('username', username);
+          formData.append('email', email);
+          formData.append('password', password);
+          formData.append('bio', bio);
+
+          if (avatarFile) {
+            formData.append('profilePic', avatarFile);
+          } else {
+            formData.append('presetAvatar', selectedAvatar);
+          }
+
+          const user = await API.register(formData);
+          API.setToken(user.token);
+          API.setCurrentUser(user);
+          API.showToast('Account created successfully!', 'success');
+
+          setTimeout(() => {
+            window.location.href = '/index.html';
+          }, 500);
+        } catch (err) {
+          API.showToast(err.message, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

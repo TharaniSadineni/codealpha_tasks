@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="20" fill="url(#bg4)" />
+  <polygon points="100,50 300,450 250,480 50,80" fill="#ffffff" opacity="0.05" />
+  <polygon points="500,20 750,400 700,430 450,50" fill="#ffffff" opacity="0.05" />
+  <!-- Database Stack Vector Graphic -->
+  <g transform="translate(300, 110)">
+    <!-- Top Cylinder -->
+    <ellipse cx="100" cy="40" rx="90" ry="30" fill="#ffffff" opacity="0.95" />
+    <path d="M10 40 V90 C10 106 50 120 100 120 C150 120 190 106 190 90 V40 Z" fill="#34D399" opacity="0.8" />
+    <ellipse cx="100" cy="40" rx="70" ry="20" fill="#064E3B" opacity="0.2" />
+    <!-- Middle Cylinder -->
+    <path d="M10 110 V160 C10 176 50 190 100 190 C150 190 190 176 190 160 V110 Z" fill="#ffffff" opacity="0.9" />
+    <!-- Bottom Cylinder -->
+    <path d="M10 180 V230 C10 246 50 260 100 260 C150 260 190 246 190 230 V180 Z" fill="#34D399" opacity="0.9" />
+    <!-- Floating Lightning Bolt Overlay -->
+    <polygon points="140,80 80,180 120,180 90,260 170,140 130,140" fill="#F59E0B" />
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" />
+      <stop offset="100%" stop-color="#FB923C" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="20" fill="url(#bg5)" />
+  <!-- Sun Disk -->
+  <circle cx="400" cy="220" r="110" fill="#FEF08A" opacity="0.9" />
+  <circle cx="400" cy="220" r="140" fill="#FEF08A" opacity="0.2" />
+  <!-- Mountain Silhouettes -->
+  <path d="M50 420 L280 200 L420 320 L580 180 L750 420 Z" fill="#881337" opacity="0.7" />
+  <path d="M-20 450 L180 260 L320 370 L520 220 L820 450 Z" fill="#4C0519" />
+  <!-- Sun Rays -->
+  <line x1="400" y1="50" x2="400" y2="80" stroke="#FFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+  <line x1="260" y1="100" x2="285" y2="125" stroke="#FFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+  <line x1="540" y1="100" x2="515" y2="125" stroke="#FFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+</svg>

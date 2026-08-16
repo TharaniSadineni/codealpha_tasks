@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub - Create Post</title>
+  <meta name="description" content="Create a new post on ConnectHub with image and caption.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <div class="logo-icon">C</div>
+        <span>ConnectHub</span>
+      </a>
+      <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <div id="navUserMenu" class="user-menu">
+        <!-- Rendered by auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Create Post Form Container -->
+  <main class="main-container">
+    <div class="create-post-card">
+      <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">
+        ➕ Create a New Post
+      </h1>
+
+      <form id="createPostForm">
+        <div class="form-group">
+          <label class="form-label" for="postCaptionInput">Post Caption</label>
+          <textarea id="postCaptionInput" class="form-textarea" rows="4" placeholder="What's on your mind? Share your thoughts, projects, or ideas..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Select Sample Image Graphic</label>
+          <div class="preset-posts-grid" style="grid-template-columns: repeat(6, 1fr);">
+            <img src="/images/posts/post1.png" class="preset-post-thumb selected" data-src="/images/posts/post1.png" alt="Preset 1">
+            <img src="/images/posts/post2.png" class="preset-post-thumb" data-src="/images/posts/post2.png" alt="Preset 2">
+            <img src="/images/posts/post3.png" class="preset-post-thumb" data-src="/images/posts/post3.png" alt="Preset 3">
+            <img src="/images/posts/post4.png" class="preset-post-thumb" data-src="/images/posts/post4.png" alt="Preset 4">
+            <img src="/images/posts/post5.png" class="preset-post-thumb" data-src="/images/posts/post5.png" alt="Preset 5">
+            <img src="/images/posts/post6.png" class="preset-post-thumb" data-src="/images/posts/post6.png" alt="Preset 6">
+            <img src="/images/posts/post7.png" class="preset-post-thumb" data-src="/images/posts/post7.png" alt="Preset 7">
+            <img src="/images/posts/post8.png" class="preset-post-thumb" data-src="/images/posts/post8.png" alt="Preset 8">
+            <img src="/images/posts/post9.png" class="preset-post-thumb" data-src="/images/posts/post9.png" alt="Preset 9">
+            <img src="/images/posts/post10.png" class="preset-post-thumb" data-src="/images/posts/post10.png" alt="Preset 10">
+            <img src="/images/posts/post11.png" class="preset-post-thumb" data-src="/images/posts/post11.png" alt="Preset 11">
+            <img src="/images/posts/post12.png" class="preset-post-thumb" data-src="/images/posts/post12.png" alt="Preset 12">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="postFileInput">Or Upload Custom Image</label>
+          <input type="file" id="postFileInput" class="form-input" accept="image/*">
+        </div>
+
+        <div class="image-preview-box" id="imagePreviewBox">
+          <label class="form-label">Image Preview</label>
+          <img id="previewImage" src="" alt="Selected Preview">
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+          <button type="submit" class="btn btn-primary" style="flex: 1;">🚀 Publish Post</button>
+          <a href="/index.html" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/create-post.js"></script>
+</body>
+</html>

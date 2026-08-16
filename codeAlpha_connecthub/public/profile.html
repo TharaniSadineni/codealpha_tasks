@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub - User Profile</title>
+  <meta name="description" content="View user profile, followers count, following count, posts, and connect on ConnectHub.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <div class="logo-icon">C</div>
+        <span>ConnectHub</span>
+      </a>
+      <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <div id="navUserMenu" class="user-menu">
+        <!-- Rendered by auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Content Container -->
+  <main class="main-container" style="max-width: 860px;">
+    <!-- Profile Header Card -->
+    <div id="profileHeaderContainer">
+      <!-- Rendered by profile.js -->
+    </div>
+
+    <!-- User Posts Title -->
+    <h2 style="font-size: 1.2rem; margin-bottom: 16px; color: var(--text-main);">User Posts</h2>
+
+    <!-- Posts Feed -->
+    <div id="userPostsContainer">
+      <!-- User posts rendered by profile.js -->
+    </div>
+  </main>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Profile</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="editProfileForm">
+        <div class="form-group">
+          <label class="form-label" for="editNameInput">Full Name</label>
+          <input type="text" id="editNameInput" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="editBioInput">Bio</label>
+          <textarea id="editBioInput" class="form-textarea" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Post Modal -->
+  <div class="modal-overlay" id="editPostModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Post Caption</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="editPostForm">
+        <div class="form-group">
+          <label class="form-label" for="editPostCaptionInput">Caption</label>
+          <textarea id="editPostCaptionInput" class="form-textarea" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Update Post</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+</html>

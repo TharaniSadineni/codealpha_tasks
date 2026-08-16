@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub - Login</title>
+  <meta name="description" content="Log in to your ConnectHub account to view feed, like, comment, and connect with users.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <div class="logo-icon">C</div>
+        <span>ConnectHub</span>
+      </a>
+      <div id="navUserMenu" class="user-menu">
+        <!-- Rendered by auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Card -->
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Log in to your ConnectHub account</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="loginEmailInput">Email or Username</label>
+          <input type="text" id="loginEmailInput" class="form-input" placeholder="e.g. aditya@connecthub.com or adityak" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPasswordInput">Password</label>
+          <input type="password" id="loginPasswordInput" class="form-input" placeholder="Enter your password" required>
+          <div style="text-align: right; margin-top: 6px;">
+            <a href="/forgot-password.html" class="auth-link" style="font-size: 0.85rem;">Forgot Password?</a>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;">Log In</button>
+      </form>
+
+      <!-- Quick Demo Login Buttons -->
+      <div class="demo-login-box">
+        <div class="demo-title">⚡ Quick Demo Accounts:</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-secondary btn-sm demo-account-btn" data-email="aditya@connecthub.com">Aditya Kulkarni</button>
+          <button type="button" class="btn btn-secondary btn-sm demo-account-btn" data-email="sarah@connecthub.com">Sarah Miller</button>
+          <button type="button" class="btn btn-secondary btn-sm demo-account-btn" data-email="rohan@connecthub.com">Rohan Malhotra</button>
+        </div>
+      </div>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="/register.html" class="auth-link">Sign Up</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailOrUsername = document.getElementById('loginEmailInput').value.trim();
+        const password = document.getElementById('loginPasswordInput').value;
+
+        try {
+          const user = await API.login({ emailOrUsername, password });
+          API.setToken(user.token);
+          API.setCurrentUser(user);
+          API.showToast(`Welcome back, ${user.name}!`, 'success');
+          
+          setTimeout(() => {
+            window.location.href = '/index.html';
+          }, 500);
+        } catch (err) {
+          API.showToast(err.message, 'error');
+        }
+      });
+
+      // Quick Demo Account Buttons
+      document.querySelectorAll('.demo-account-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('loginEmailInput').value = btn.dataset.email;
+          document.getElementById('loginPasswordInput').value = 'password123';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
