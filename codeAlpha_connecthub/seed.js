@@ -70,9 +70,11 @@ const sampleCommentsText = [
   'ConnectHub feed is looking super clean!'
 ];
 
-const seedDatabase = async () => {
+const seedDatabase = async (shouldExit = true) => {
   try {
-    await connectDB();
+    if (shouldExit) {
+     await connectDB();
+    }
 
     console.log('[Seed] Clearing existing collections...');
     await User.deleteMany({});
@@ -162,11 +164,21 @@ const seedDatabase = async () => {
     console.log('🔑 All seed users have password: "password123"');
     console.log('==================================================\n');
 
-    process.exit(0);
+    if (require.main === module) {
+      process.exit(0);
+    }
   } catch (error) {
     console.error('Seeding error:', error);
-    process.exit(1);
+    if (require.main === module) {
+      process.exit(1);
+    } else {
+      throw error;
+    }
   }
 };
 
-seedDatabase();
+module.exports = seedDatabase;
+
+if (require.main === module) {
+  seedDatabase();
+}

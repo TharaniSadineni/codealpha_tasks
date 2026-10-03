@@ -9,8 +9,6 @@ dotenv.config();
 const app = express();
 
 // Connect to Database
-connectDB();
-
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -39,8 +37,16 @@ app.get('/post-details', (req, res) => res.sendFile(path.join(__dirname, 'public
 
 const PORT = process.env.PORT || 5050;
 
-app.listen(PORT, () => {
-  console.log(`==================================================`);
-  console.log(`🚀 ConnectHub Server running on http://localhost:${PORT}`);
-  console.log(`==================================================`);
+connectDB().then(async () => {
+  if (process.env.SEED_DB === 'true') {
+    const seedDatabase = require('./seed');
+    await seedDatabase(false);
+    console.log('✅ Production database seeded successfully');
+  }
+
+  app.listen(PORT, () => {
+    console.log(`==================================================`);
+    console.log(`🚀 ConnectHub Server running on http://localhost:${PORT}`);
+    console.log(`==================================================`);
+  });
 });
