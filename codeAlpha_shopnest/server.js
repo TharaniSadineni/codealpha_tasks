@@ -59,7 +59,13 @@ const connectDB = async () => {
     try {
       await mongoose.connect(mongoURI, { serverSelectionTimeoutMS: 5000 });
       console.log(`✅ Production MongoDB Connected to: ${mongoose.connection.host}`);
-    } catch (err) {
+      if (process.env.SEED_DB === 'true') {
+        const seedFunc = require('./seed');
+        await seedFunc(false);
+        console.log('✅ Production database seeded successfully');
+      }
+    } 
+    catch (err) {
       console.error('❌ FATAL ERROR: Failed to connect to Production MongoDB:', err.message);
       console.error('Stopping server. In-memory database fallback is disabled in production mode.');
       process.exit(1);
